@@ -1,11 +1,11 @@
 # Itemlist
 
 ## 3 Phi Full Bridge Diode Rectifiers
-- [SQL50A 50A 1200V Alüminyum 3 Fazlı Köprü Diyot](https://www.motorobit.com/urun/sql50a-50a-1200v-aluminyum-3-fazli-kopru-diyot)
-- [SKBPC5010 50A 1000V Trifaze Köprü Diyot 3 Faz](https://www.motorobit.com/urun/skbpc5010-50a-1000v-trifaze-kopru-diyot-3-faz)
+- [x] [SQL50A 50A 1200V Alüminyum 3 Fazlı Köprü Diyot](https://www.motorobit.com/urun/sql50a-50a-1200v-aluminyum-3-fazli-kopru-diyot)
+- [x] [SKBPC5010 50A 1000V Trifaze Köprü Diyot 3 Faz](https://www.motorobit.com/urun/skbpc5010-50a-1000v-trifaze-kopru-diyot-3-faz)
 
 ## MCU
-- [NodeMCU LoLin ESP8266 Geliştirme Kartı - USB Chip](https://www.motorobit.com/urun/nodemcu-lolin-esp8266-gelistirme-karti-usb-chip)
+- [x] [NodeMCU LoLin ESP8266 Geliştirme Kartı - USB Chip](https://www.motorobit.com/urun/nodemcu-lolin-esp8266-gelistirme-karti-usb-chip)
 
 ## MOSFETs & IGBTs
 - [x] [IRFP460 - 500V 20A Mosfet - TO247](https://www.motorobit.com/urun/irfp460-500v-20a-mosfet-to247)
