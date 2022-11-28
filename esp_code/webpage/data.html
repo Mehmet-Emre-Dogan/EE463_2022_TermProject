@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<meta http-equiv='content-type' content='text/html; charset=UTF-8'>
+<meta charset='utf-8' name='viewport' content='width=device-width, initial-scale=1'>
+<style >
+html {
+  font-family: Helvetica, sans-serif;
+  color: white;
+  background-color:#333;
+  justify-content: center;
+
+}
+
+.container{
+  justify-content: center;
+  display: flex;
+  padding: 20px;
+}
+
+h2{
+  text-align: center;
+  /* font-size: 25px; */
+}
+
+.box {
+  justify-content: center;
+  text-align: justify;
+  text-justify: auto;
+  font-size: large;
+  width: 90%;
+  background-color: grey;
+  padding: 20px;
+  padding-top: 5px;
+}
+
+code{
+  font-size: x-large;
+  text-align: center;
+  display: block;
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.codeP{
+  background-color: #555;
+  width: 85%;
+  display: flow-root;
+  color: #00FF00;
+  padding: 5px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+        background-color: DodgerBlue;
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        cursor: pointer;
+        font-size: 20px;
+        margin: auto;
+        display: inline-block;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+        background-color: RoyalBlue;
+        transition: all 0.2s ease-in-out;
+        transform: scale(1.1);
+        }
+
+.slidecontainer {
+    width: 100%;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #049faa;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #07788b;
+    cursor: pointer;
+  }
+
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+/* For desktop: */
+@media only screen and (min-width: 800px) {
+  html {
+    max-width: 60%;
+    margin: auto;
+  }
+
+  .codeP{
+  background-color: #555;
+  width: 80%;
+  display: flow-root;
+  color: #00FF00;
+  padding: 5px;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slidecontainer{
+    width: 60%;
+    margin: auto;
+}
+}
+
+  </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Motor Driver</h1>
+
+        <div class='container'>
+            <div class='box'>
+                <h2>Stats</h2>
+
+                <div class="slidecontainer">
+                    <code>
+                        <p class="codeP" style="font-size: large;">
+                            Current Speed [rpm]: 1500 <br>
+                            Current Duty [/1023]: 500 <br>
+                        </p>
+                        <p class="codeP">Control Loop : Close</p>
+                        <a href="/ctrl/toggle"><button class="btn">Toggle Loop</button></a>
+                    <code>
+                </div>
+            </div>
+        </div> 
+
+        <div class='container'>
+            <div class='box'>
+                <h2>Open Loop</h2>
+                
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="1023" value="50" class="slider" id="dutySlider", oninput="displayDuty()">
+                    <code>
+                        <p class="codeP">Duty [/1023]: <span id="dutyValue"></span></p>
+                        <p class="codeP">Duty [%]: <span id="dutyPercent"></span></p>
+                        <span id="saDuty">
+                            <!-- <a id="aDuty" href="#"><button class="btn">Set Duty</button></a> -->
+                        </span>
+                    <code>
+                </div>
+            </div>
+        </div> 
+
+        <div class='container'>
+            <div class='box'>
+                <h2>Close Loop</h2>
+
+                <div class="slidecontainer">
+                    <input type="range" min="100" max="1500" value="50" class="slider" id="speedSlider", oninput="displaySpeed()">
+                    <code>
+                        <p class="codeP">Speed [rpm]: <span id="speedValue"></span></p>
+                        <p class="codeP">Speed [%]: <span id="speedPercent"></span></p>
+                        <span id="saSpeed">
+                            <a id="aSpeed" href="#"><button class="btn">Set Speed</button></a>
+                        </span>
+                    <code>
+                </div>
+            </div>
+        </div> 
+
+        <br>
+        <br>
+
+        <div class="footer">© 2022 <br> Web design by medogan <a style="color: #049faa;" href="https://medogan.com">medogan.com</a></div>
+        <br>
+        
+
+          <script>
+          function displayDuty(){
+            var slider = document.getElementById("dutySlider");
+            var dv = document.getElementById("dutyValue");
+            var dvpc = document.getElementById("dutyPercent");
+            dv.innerHTML = slider.value;
+            dvpc.innerHTML = String((Number(slider.value)/1023*100).toFixed(3));
+
+            document.getElementById("saDuty").innerHTML = "<a id='aDuty' href=" + '/sd/' + slider.value + "><button class='btn'>Set Duty</button></a>";
+          }
+          function displaySpeed(){
+            var slider = document.getElementById("speedSlider");
+            var sv = document.getElementById("speedValue");
+            var svpc = document.getElementById("speedPercent");
+            sv.innerHTML = slider.value;
+            svpc.innerHTML = String((Number(slider.value)/1500*100).toFixed(3));
+
+            document.getElementById("saSpeed").innerHTML = "<a id='aSpeed' href=" + '/ss/' + slider.value + "><button class='btn'>Set Speed</button></a>";
+          }
+          </script>
+
+        <script>
+            displayDuty()
+            displaySpeed()
+        </script>
+</body>
+</html>
