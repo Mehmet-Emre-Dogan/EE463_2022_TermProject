@@ -170,10 +170,12 @@ code{
                 <h2>Open Loop</h2>
                 
                 <div class="slidecontainer">
-                    <input type="range" min="1" max="1023" value="50" class="slider" id="dutySlider", oninput="displayDuty()">
                     <code>
                         <p class="codeP">Duty [/1023]: <span id="dutyValue"></span></p>
                         <p class="codeP">Duty [%]: <span id="dutyPercent"></span></p>
+                        <br>
+                        <input type="range" min="1" max="1023" value="50" class="slider" id="dutySlider", oninput="displayDuty()">
+                        <br> <br> <br>
                         <span id="saDuty">
                             <!-- <a id="aDuty" href="#"><button class="btn">Set Duty</button></a> -->
                         </span>
@@ -187,10 +189,12 @@ code{
                 <h2>Close Loop</h2>
 
                 <div class="slidecontainer">
-                    <input type="range" min="100" max="1500" value="50" class="slider" id="speedSlider", oninput="displaySpeed()">
                     <code>
                         <p class="codeP">Speed [rpm]: <span id="speedValue"></span></p>
                         <p class="codeP">Speed [%]: <span id="speedPercent"></span></p>
+                        <br>
+                        <input type="range" min="100" max="1500" value="50" class="slider" id="speedSlider", oninput="displaySpeed()">
+                        <br> <br> <br>
                         <span id="saSpeed">
                             <a id="aSpeed" href="#"><button class="btn">Set Speed</button></a>
                         </span>
