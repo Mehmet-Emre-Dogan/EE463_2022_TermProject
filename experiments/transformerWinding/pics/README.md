@@ -10,13 +10,13 @@
 <div><center>
 
 ### Winding
-![tr](.\mutualIndTransf.jpeg)
+![tr](./mutualIndTransf.jpeg)
 
 ### Inductance Measurement at Primary
-![tr](.\measMutualIndTransf.jpeg)
+![tr](./measMutualIndTransf.jpeg)
 
 ### Inductance Measurement at Primary [Results]
-![tr](.\mutualIndPrimary.jpeg)
+![tr](./mutualIndPrimary.jpeg)
 
 <center></div>
 
@@ -28,19 +28,19 @@ As a result, this component is useless as a transformer.
 <div><center>
 
 ### Winding
-![tr](.\eCoreTransformer.jpeg)
+![tr](./eCoreTransformer.jpeg)
 
 ### Test Setup
-![setup](.\setup.jpeg)
+![setup](./setup.jpeg)
 
 ### Primary Voltage
-![tr](.\primary.jpeg)
+![tr](./primary.jpeg)
 
 ### Secondary Voltage
-![tr](.\secondary.jpeg)
+![tr](./secondary.jpeg)
 
 ### Primary Current
-![tr](.\primaryCurrent.jpeg)
+![tr](./primaryCurrent.jpeg)
 
 <center></div>
 
