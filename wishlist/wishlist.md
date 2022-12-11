@@ -16,7 +16,7 @@
 
 
 ## Current Sensors
-- https://www.direnc.net/acs714-akim-sensoru-30a30a-pololu --> 2 [to measure armature urrent, 1 redundancy]
+- https://www.direnc.net/acs714-akim-sensoru-30a30a-pololu --> 2 [to measure armature current, 1 redundancy]
 
 ## Heatsinks
 - https://www.ozdisan.com/elektromekanik-komponentler/sogutucular/aluminyum-sogutucular/ZHS-45ASD35MM/354769 --> 11 [8 for H bridge, 2 for dynamic braking, 1 redundancy]
