@@ -12,7 +12,7 @@
 ## Capacitors
 - https://www.ozdisan.com/pasif-komponentler/kondansatorler/aluminyum-kondansatorler/K754001020PM0E050/503387 --> 3 [2 in parallels, 1 redundancy]
 
-- https://www.ozdisan.com/pasif-komponentler/kondansatorler/aluminyum-kondansatorler/PKR1-063V222MJ350/337141 --> 5 [we need 1 but its cheap, lets but more]
+- https://www.ozdisan.com/pasif-komponentler/kondansatorler/aluminyum-kondansatorler/PKR1-063V222MJ350/337141 --> 5 [we need 1 but its cheap, lets buy more]
 
 
 ## Current Sensors
