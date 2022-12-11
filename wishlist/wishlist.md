@@ -72,9 +72,6 @@
 ## Various Sensors
 - https://www.robotistan.com/infrared-mesafe-sensoru-220cm --> 2 [1 for rpm feedback, 1 redundancy]
 
-## Jumper
-- https://www.robotistan.com/40-pin-ayrilabilen-disi-disi-f-f-jumper-kablo-200-mm --> 1 [co wire peripherals (screen, rotary encoder etc.)]
-
 ## Switch & Pot
 - For menu control
 - https://www.robotistan.com/ic118-mini-isikli-anahtar --> 2 
