@@ -83,3 +83,6 @@
 - https://www.robotistan.com/kn113-potansiyometre-basligi-kirmizi --> 2 [for rotaries and pots]
 
 - https://www.robotistan.com/10k-cok-turlu-trimpot-dik-3296w-1-103 --> 5 [ for opamps]
+
+## MUX
+- https://www.robotistan.com/cd74hc4067-16-kanal-analog-dijital-multiplexer --> [we need more outputs]
