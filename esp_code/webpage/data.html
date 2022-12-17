@@ -218,7 +218,7 @@ code{
             dv.innerHTML = slider.value;
             dvpc.innerHTML = String((Number(slider.value)/1023*100).toFixed(3));
 
-            document.getElementById("saDuty").innerHTML = "<a id='aDuty' href=" + '/sd/' + slider.value + "><button class='btn'>Set Duty</button></a>";
+            document.getElementById("saDuty").innerHTML = "<a id='aDuty' href=" + '/sd/?' + slider.value + "?><button class='btn'>Set Duty</button></a>";
           }
           function displaySpeed(){
             var slider = document.getElementById("speedSlider");
@@ -227,7 +227,7 @@ code{
             sv.innerHTML = slider.value;
             svpc.innerHTML = String((Number(slider.value)/1500*100).toFixed(3));
 
-            document.getElementById("saSpeed").innerHTML = "<a id='aSpeed' href=" + '/ss/' + slider.value + "><button class='btn'>Set Speed</button></a>";
+            document.getElementById("saSpeed").innerHTML = "<a id='aSpeed' href=" + '/ss/?' + slider.value + "?><button class='btn'>Set Speed</button></a>";
           }
           </script>
 
