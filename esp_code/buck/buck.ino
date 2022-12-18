@@ -374,7 +374,7 @@ void loop() {
             client.println("                        </p>");
             client.println("                        ");
             client.println("                        <a href='/ctrl/toggle'><button class='btn'>Toggle Loop</button></a>");
-            client.println("                        <a href=':8080/webserial'><button class='btn'>Open Serial</button></a>");
+            client.println("                        <a href='http://192.168.1.80:8080/webserial'><button class='btn'>Open Serial</button></a>");
             client.println("                    <code>");
             client.println("                </div>");
             client.println("            </div>");
@@ -469,6 +469,7 @@ void loop() {
             client.println("        </script>");
             client.println("</body>");
             client.println("</html>");
+
 
 
 
