@@ -146,8 +146,7 @@ code{
   </style>
 </head>
 <body>
-    <h1 style='text-align: center;'>Smart Motor Driver</h1>
-    <h3 style='text-align: center;'><a style='text-align: center; color: white; text-decoration: none;' href='https://github.com/Mehmet-Emre-Dogan/EE463_2022_TermProject'>Volt Motors Inc.</a></h3>
+    <h1 style='text-align: center;'>Motor Driver</h1>
 
         <div class='container'>
             <div class='box'>
@@ -156,42 +155,15 @@ code{
                 <div class='slidecontainer'>
                     <code>
                         <p class='codeP' style='font-size: large;'>
-                            Speed [rpm]: --- <br>
-                            Duty [/1023]: --- <br>
-                            Current [A]: --- <br>
-                            Temp [°C]: --- <br>
-                            Fan Speed [/1023]: --- <br>
-                            
+                            Current Speed [rpm]: 1500 <br>
+                            Current Duty [/1023]: 500 <br>
                         </p>
-                        <p class='codeP'>Control Loop: Open<br>
-                          Direction: Left 
-                        </p>
-                        
+                        <p class='codeP'>Control Loop : Close</p>
                         <a href='/ctrl/toggle'><button class='btn'>Toggle Loop</button></a>
-                        <a href=':8080/webserial'><button class='btn'>Open Serial</button></a>
                     <code>
                 </div>
             </div>
         </div> 
-
-        <div class='container'>
-          <div class='box'>
-              <h2>Set Direction</h2>
-              <div class='slidecontainer'>
-                  <code>
-                    <h3 class='codeP' style='color:rgb(253, 98, 98); text-decoration: underline;'>WARNING!</h3>
-                      <p class='codeP' style='color:rgb(252, 206, 108);'>Stop before changing direction!<br> 
-                        Our company is not responsible for the damages due to user errors.
-                      </p>
-                      <br>
-                      
-                      <a href='/dir/left'><button class='btn'>Left</button></a>
-                      <a href='/dir/stop'><button class='btn'>Stop</button></a>
-                      <a href='/dir/right'><button class='btn'>Right</button></a>
-                  <code>
-              </div>
-          </div>
-      </div> 
 
         <div class='container'>
             <div class='box'>
@@ -202,7 +174,7 @@ code{
                         <p class='codeP'>Duty [/1023]: <span id='dutyValue'></span></p>
                         <p class='codeP'>Duty [%]: <span id='dutyPercent'></span></p>
                         <br>
-                        <input type='range' min='103' max='921' value='50' class='slider' id='dutySlider', oninput='displayDuty()'>
+                        <input type='range' min='1' max='1023' value='50' class='slider' id='dutySlider', oninput='displayDuty()'>
                         <br> <br> <br>
                         <span id='saDuty'>
                             <!-- <a id='aDuty' href='#'><button class='btn'>Set Duty</button></a> -->
@@ -221,7 +193,7 @@ code{
                         <p class='codeP'>Speed [rpm]: <span id='speedValue'></span></p>
                         <p class='codeP'>Speed [%]: <span id='speedPercent'></span></p>
                         <br>
-                        <input type='range' min='60' max='1500' value='50' class='slider' id='speedSlider', oninput='displaySpeed()'>
+                        <input type='range' min='100' max='1500' value='50' class='slider' id='speedSlider', oninput='displaySpeed()'>
                         <br> <br> <br>
                         <span id='saSpeed'>
                             <a id='aSpeed' href='#'><button class='btn'>Set Speed</button></a>
@@ -262,4 +234,4 @@ code{
             displaySpeed()
         </script>
 </body>
-</html>
+</html

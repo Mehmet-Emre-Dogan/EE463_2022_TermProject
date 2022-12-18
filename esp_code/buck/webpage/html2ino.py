@@ -3,6 +3,7 @@ with open("data.html", "r", encoding="utf-8") as fil:
     for line in fil:
             if len(line) >=2:
                 line = line.strip("\n")
+                # line = line.replace('"', "'")
                 line = f'client.println("{line}");\n'
             else:
                 line = 'client.println();\n'
