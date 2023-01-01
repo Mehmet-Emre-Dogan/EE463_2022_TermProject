@@ -3,8 +3,6 @@
 #include "secrets.h"
 #include "pinDefines.h"
 #define DEBUG true
-#define MAX_US 2000
-#define MIN_US 990
 
 //ota
 #include <ESP8266mDNS.h>
@@ -17,11 +15,14 @@
 #include <WebSerial.h>
 
 // CONSTANTS
-#define RAMP_COEFF 1.0/3/1000
-#define MIN_ALLOWED_PWM 103
+#define MIN_ALLOWED_PWM 0 //103
 #define MAX_ALLOWED_PWM 921
 #define MIN_ALLOWED_SPEED 59
 #define MAX_ALLOWED_SPEED 1500
+
+#define CURRENT_COEFF 0.0740
+#define CURRENT_IGNORE_THRESH 5 // 0-1023
+#define CURR_MEAS_SAMPLE_COU 7
 
 const unsigned long accelInterval = 5; // milliseconds
 
@@ -29,6 +30,15 @@ void ICACHE_RAM_ATTR handleBtn();
 
 // GLOBALS
 String header; // Variable to store the HTTP request
+
+unsigned long printInterval = 500;
+unsigned long lastPrintTime = 0; // milliseconds
+
+const unsigned long analogReadInterval = 50;
+unsigned long lastAnalogReadTime = 0; // milliseconds
+int prevReadVal = 0;
+
+
 bool isMachineEnabled = true;
 bool isLeft = true;
 bool isLeftPrev = true;
@@ -38,7 +48,8 @@ int motorPwmCurr = 0;
 bool isAccelarating = true;
 unsigned long lastAccelTime = 0; // milliseconds
 
-int current = 20;
+float currentCurrent = 20;
+float currentSpeed = 0;
 
 int motorSpeedTarget = 0;
 int motorSpeedCurr = 0;
@@ -79,6 +90,7 @@ void setup() {
   pinMode(BLUE_LED, OUTPUT);
   pinMode(INDICATOR_LED, OUTPUT);
   pinMode(BTN, INPUT_PULLUP);
+  pinMode(CURRENT_SENS_PIN, INPUT);
   digitalWrite(BLUE_LED, LOW);
   digitalWrite(INDICATOR_LED, isMachineEnabled);
 
@@ -98,6 +110,7 @@ void setup() {
 
   // printserver 192.168.1.x:8080/webserial
   WebSerial.begin(&printServer); 
+  WebSerial.msgCallback(recvMsg);
   printServer.begin();
   
   /////////////////////////////OTA////////////////////////////
@@ -361,6 +374,7 @@ void loop() {
             client.println();
             client.println("                <div class='slidecontainer'>");
             client.println("                    <code>");
+            /*
             client.println("                        <p class='codeP' style='font-size: large;'>");
             client.println("                            Speed [rpm]: --- <br>");
             client.println("                            Duty [/1023]: --- <br>");
@@ -369,6 +383,7 @@ void loop() {
             client.println("                            Fan Speed [/1023]: --- <br>");
             client.println("                            ");
             client.println("                        </p>");
+            */
             client.println("                        <p class='codeP'>Control Loop: Open<br>");
             client.println("                          Direction: Left ");
             client.println("                        </p>");
@@ -408,7 +423,7 @@ void loop() {
             client.println("                        <p class='codeP'>Duty [/1023]: <span id='dutyValue'></span></p>");
             client.println("                        <p class='codeP'>Duty [%]: <span id='dutyPercent'></span></p>");
             client.println("                        <br>");
-            client.println("                        <input type='range' min='103' max='921' value='50' class='slider' id='dutySlider', oninput='displayDuty()'>");
+            client.println("                        <input type='range' min='103' max='921' value='" + String(motorPwmTarget) + "' class='slider' id='dutySlider', oninput='displayDuty()'>");
             client.println("                        <br> <br> <br>");
             client.println("                        <span id='saDuty'>");
             client.println("                            <!-- <a id='aDuty' href='#'><button class='btn'>Set Duty</button></a> -->");
@@ -500,9 +515,28 @@ void loop() {
   else{
     shutDown();
   }
+
   
+  if (millis() - lastAnalogReadTime >= analogReadInterval){
+    measureCurrentAverage(CURR_MEAS_SAMPLE_COU);
+    lastAnalogReadTime = millis();
+  } 
   
+  printStats();
   ArduinoOTA.handle();
+}
+
+void recvMsg(uint8_t *data, size_t len){
+  WebSerial.println("--> Received Data...");
+  int num = atoi( (const char *) data );
+  /*
+  for(int i=0; i < len; i++){
+    d += char(data[i]);
+  }*/
+  printInterval = num;
+  char buf[100];
+  sprintf(buf, "--> Print interval is set to %d ms.", num);
+  WebSerial.println(buf);
 }
 
 void drive(){
@@ -535,8 +569,46 @@ void calcRamp(){
   
 }
 
-void readCurrent(){
-  ;
+int measureCurrentRaw(){
+  int output = 0;
+  output = (512 - analogRead(CURRENT_SENS_PIN));
+  if (output < 0)
+    output *= -1;
+  output -= CURRENT_IGNORE_THRESH; // Threshold
+  if(output < 0)
+    output = 0;
+  if(output > 512)
+    output = 512;
+  return output;
+}
+
+void measureCurrentAverage(int sampleCount){
+  int averageOutput = 0;
+  for(int i = 0; i < sampleCount; i++){
+    averageOutput += measureCurrentRaw();
+  }
+  averageOutput = averageOutput/sampleCount;
+  
+  // map(value, fromLow, fromHigh, toLow, toHigh)
+  
+  currentCurrent = ( (float) averageOutput) * CURRENT_COEFF; // Sensivity, i.e. multiplier
+}
+
+void printStats(){
+  if (millis() - lastPrintTime >=  printInterval){
+    char timestr[40];
+    sprintf(timestr,"t: %u", (millis()/100) );
+    WebSerial.print(timestr);
+    WebSerial.print(" motorPwmCurr:");
+    WebSerial.print(motorPwmCurr);
+    WebSerial.print(" currentCurr:");
+    WebSerial.print(currentCurrent);
+    WebSerial.print(" spdCurr:");
+    WebSerial.print(currentSpeed);
+    WebSerial.println();
+
+    lastPrintTime = millis();
+}
 }
 
 void shutDown(){
