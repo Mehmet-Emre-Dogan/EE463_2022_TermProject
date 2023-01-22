@@ -3,6 +3,11 @@
 ![image](./pics/demo/device/top.jpg)
 
 # Circuit Diagrams
+
+## Main Block Diagram
+![image](./pics/blockDiag.png)
+
+
 ## Main Buck Converter
 ![image](./pcbDesigns/buck/buck/pics/sch.jpg)
 
