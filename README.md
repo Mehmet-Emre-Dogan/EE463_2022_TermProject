@@ -7,6 +7,8 @@
 ## Main Block Diagram
 ![image](./pics/blockDiag.png)
 
+![image](./pics/blockDiag2.png)
+
 
 ## Main Buck Converter
 ![image](./pcbDesigns/buck/buck/pics/sch.jpg)
